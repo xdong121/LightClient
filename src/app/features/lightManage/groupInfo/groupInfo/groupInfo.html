@@ -1,0 +1,27 @@
+<div ba-panel ba-panel-title="组信息" ba-panel-class="with-scroll" cg-busy="[vm.loadPromise, vm.deletePromise]">
+
+    <div class="add-row-editable-table">
+        <button class="btn btn-primary" ng-click="vm.add()">添加</button>
+    </div>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>               
+                <th>名称</th>
+                <th>备注</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody >
+            <tr ng-repeat="r in vm.items | orderBy: 'order'">               
+                <td>{{r.groupName}}</td>
+                <td>{{r.remark}}</td>
+                <td>
+                    <button class="btn btn-primary editable-table-button btn-xs" ng-click="vm.edit(r)">编辑</button>
+                    <button class="btn btn-danger editable-table-button btn-xs" 
+                        sweetalert sweet-options='vm.sweetOptions' sweet-on-confirm="vm.remove(r)">删除</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

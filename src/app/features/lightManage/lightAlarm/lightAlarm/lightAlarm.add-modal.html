@@ -1,0 +1,45 @@
+<div class="modal-content" cg-busy="vm.addPromise">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
+            <em class="ion-ios-close-empty sn-link-close"></em>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">添加条目</h4>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" id="form" name="form" ng-submit="vm.submitAdd()" novalidate>          
+            <div class="form-group" ng-class="{'has-error': form.controlNo.$invalid}">
+                <label for="controlNo" class="col-sm-2 control-label">控制器编号</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="controlNo" name="controlNo" placeholder="控制器编号" ng-model="vm.current.controlNo" maxlength="10"
+                        ng-required="true" ng-maxlength="10">
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': form.lightNo.$invalid}">
+                <label for="lightNo" class="col-sm-2 control-label">灯线编号</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="lightNo" name="lightNo" placeholder="灯线编号" ng-model="vm.current.lightNo" maxlength="10"
+                        ng-required="true" ng-maxlength="10">
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': form.lightSonNo.$invalid}">
+                <label for="lightSonNo" class="col-sm-2 control-label">灯子编号</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="lightSonNo" name="lightSonNo" placeholder="灯子编号" ng-model="vm.current.lightSonNo" maxlength="10"
+                        ng-required="true" ng-maxlength="10">
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': form.reMark.$invalid}">
+                <label for="reMark" class="col-sm-2 control-label">备注</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="reMark" name="reMark" placeholder="备注" ng-model="vm.current.reMark" maxlength="100"
+                        ng-maxlength="100">
+                    <p class="help-block">备注</p>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="$dismiss()">取消</button>
+        <button type="submit" form="form" class="btn btn-primary" ng-disabled="form.$invalid">保存</button>
+    </div>
+</div>

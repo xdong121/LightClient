@@ -1,0 +1,88 @@
+<div class="row" cg-busy="[vm.loadPromise, vm.addPromise, vm.addRootPromise, vm.updatePromise, vm.removePromise]">
+    <div class="col-md-6">
+        <div ba-panel ba-panel-title="灯机构" ba-panel-class="xmedium-panel">
+            <div style="display: flex; justify-content: space-between; height: 100%; ">
+                <div style="flex-basis: 200px;">
+                    <div class="control-side text-center">
+                        <div>
+                            <button class="btn btn-primary" ng-click="vm.addNewRoot()">添加控制器</button>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary" ng-click="vm.addNewNode()" ng-disabled="!vm.canAdd">{{vm.levelName}}</button>
+                        </div>
+                        <div>
+                            <button class="btn btn-info" ng-click="vm.collapse()">折叠所有</button>
+                        </div>
+                        <div>
+                            <button class="btn btn-info" ng-click="vm.expand()">展开所有</button>
+                        </div>
+                        <div>
+                            <button class="btn btn-info" ng-click="vm.refresh()">刷新</button>
+                        </div>
+                        <div>
+                            <button class="btn btn-info" ng-click="vm.selectNoTimes()" ng-disabled="!vm.canSelect">查询</button>
+                        </div>
+                        <div>
+                            <button class="btn btn-info" ng-click="vm.setNoTimes()" ng-disabled="!vm.canSelect">设置</button>
+                        </div>
+                    </div>
+                </div>
+                <div style="flex: 1; overflow-y: auto; margin-bottom: 50px;">
+                    <div js-tree="vm.basicConfig" ng-model="vm.treeData" should-apply="vm.applyModelChanges()" tree="vm.basicTree" tree-events="ready:vm.readyCB;select_node:vm.selectNodeCB"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div ba-panel ba-panel-title="灯信息" ba-panel-class="with-scroll tree-panel">
+            <div ng-if="vm.currentItem">
+                <form name="form" id="form" ng-submit="vm.updateSubmit()" novalidate>
+                    <div class="form-group" ng-class="{'has-error': form.no.$invalid}">
+                        <label for="no">名称</label>
+                        <input readonly type="text" class="form-control" id="no" name="no" placeholder="名称" ng-model="vm.currentItem.no" ng-required
+                            maxlength="10">
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': form.back2.$invalid}" ng-show="vm.canShow">
+                        <label for="back2">控制器时间</label>
+                        <input readonly="true" type="text" class="form-control" id="back2" name="back2" ng-model="vm.currentItem.back2" ng-required
+                            maxlength="100">
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': form.describe.$invalid}">
+                        <label for="describe">描述</label>
+                        <input type="text" class="form-control" id="describe" name="describe" placeholder="描述" ng-model="vm.currentItem.describe"
+                            ng-required maxlength="50">
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': form.address.$invalid}">
+                        <label for="address">地址</label>
+                        <input type="text" class="form-control" id="address" name="address" placeholder="地址" ng-model="vm.currentItem.address" ng-required
+                            maxlength="50">
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': form.longitude.$invalid}">
+                        <label for="longitude">经度</label>
+                        <input type="text" class="form-control" id="longitude" name="longitude" placeholder="经度" ng-model="vm.currentItem.longitude"
+                            ng-required maxlength="20">
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': form.latitude.$invalid}">
+                        <label for="latitude">纬度</label>
+                        <input type="text" class="form-control" id="latitude" name="latitude" placeholder="纬度" ng-model="vm.currentItem.latitude"
+                            ng-required maxlength="20">
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': form.reMark.$invalid}">
+                        <label for="reMark">备注</label>
+                        <input type="text" class="form-control" id="reMark" name="reMark" placeholder="备注" ng-model="vm.currentItem.reMark" ng-required
+                            maxlength="100">
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': form.order.$invalid}">
+                        <label for="order">顺序</label>
+                        <input type="number" class="form-control" step="1" id="order" name="order" placeholder="顺序" ng-model="vm.currentItem.order"
+                            ng-required>
+                        <span class="help-block sub-little-text">顺序必填，必须是整数。</span>
+                    </div>
+                    <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">保存</button>
+                    <button type="button" class="btn btn-danger" sweetalert sweet-options='vm.deleteSweetOptions' sweet-on-confirm="vm.remove()">删除</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

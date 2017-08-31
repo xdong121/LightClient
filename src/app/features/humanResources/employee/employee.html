@@ -1,0 +1,88 @@
+<div class="row" cg-busy="[vm.loadPromise, vm.addPromise, vm.addRootPromise, vm.removePromise]">
+    <div class="col-md-4">
+        <div ba-panel ba-panel-title="组织机构" ba-panel-class="xmedium-panel light-text">
+            <div style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+                <div style="overflow-y: auto; flex: 1;">
+                    <department-tree on-select="vm.departmentChange(selectedItem)"></department-tree>
+                </div>
+                <div style="flex-basis: 15%; margin-top: 25px;">
+                    <form class="form-inline">
+                        <label class="checkbox-inline custom-checkbox nowrap">
+                            <input type="checkbox" id="includeChildren" ng-model="vm.filter.includeChildren" ng-change="vm.departmentChange(vm.currentDepartment)">
+                            <span>包含下级</span>
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div ba-panel ba-panel-title="当前机构人员" ba-panel-class="with-scroll light-text">
+            <div ng-if="vm.currentDepartment">
+
+                <div class="add-row-editable-table">
+                    <button class="btn btn-primary" ng-click="vm.add()">添加</button>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table id="table" class="table table-bordered no-wrap" st-table="vm.items" st-pipe="vm.load">
+                        <thead>
+                            <tr>
+                                <th class="table-id"></th>
+                                <th>操作</th>
+                                <th>姓名</th>
+                                <th>组织机构</th>
+                                <th>员工编号</th>
+                                <th>状态</th>
+                                <th>性别</th>
+                                <th>出生日期</th>
+                                <th>身份证号</th>
+                                <th>电话号码</th>
+                                <th>婚姻状况</th>
+                                <th>政治面貌</th>
+                                <th>人员性质</th>
+                                <th>学历</th>
+                                <th>学历性质</th>
+                                <th>学位</th>
+                                <th>岗位</th>
+                                <th>电子邮件</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in vm.items">
+                                <td class="table-id">{{$index + 1}}</td>
+                                <td>
+                                    <a class="btn btn-primary editable-table-button btn-xs" ui-sref="humanResources.employee-edit({id: item.id})">编辑</a>
+                                    <button class="btn btn-danger editable-table-button btn-xs" sweetalert sweet-options='vm.deleteSweetOptions' sweet-on-confirm="vm.remove(item)">删除</button>
+                                </td>
+                                <td>{{item.name}}</td>
+                                <td>{{item.department.name}}</td>
+                                <td>{{item.no}}</td>
+                                <td>{{item.employeeStatusDisplay}}</td>
+                                <td>{{item.genderDisplay}}</td>
+                                <td>{{item.dateOfBirth | date: 'yyyy-MM-dd'}}</td>
+                                <td>{{item.idNumber}}</td>
+                                <td>{{item.phoneNumber}}</td>
+                                <td>{{item.maritalStatusDisplay}}</td>
+                                <td>{{item.politicalStatusDisplay}}</td>
+                                <td>{{item.employeeNatureDisplay}}</td>
+                                <td>{{item.educationalBackgroundDisplay}}</td>
+                                <td>{{item.educationNatureDisplay}}</td>
+                                <td>{{item.educationDegreeDisplay}}</td>
+                                <td>{{item.post.name}}</td>
+                                <td>{{item.emailAddress}}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td class="text-center" colspan="13">
+                                    <div st-pagination="" st-items-by-page="10" st-displayed-pages="5"></div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

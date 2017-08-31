@@ -1,0 +1,24 @@
+<div class="modal-content" cg-busy="vm.updatePromise">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
+            <em class="ion-ios-close-empty sn-link-close"></em>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">编辑条目</h4>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" id="form" name="form" ng-submit="vm.submitEdit()" novalidate>            
+            <div class="form-group" ng-class="{'has-error': form.content.$invalid}">
+                <label for="content" class="col-sm-2 control-label">电文内容</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="content" name="content" placeholder="电文内容" ng-model="vm.current.content" ng-required="true">
+                    <p class="help-block">电文内容</p>
+                </div>
+            </div>
+            
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="$dismiss()">取消</button>
+        <button type="submit" form="form" class="btn btn-primary" ng-disabled="form.$invalid">保存</button>
+    </div>
+</div>

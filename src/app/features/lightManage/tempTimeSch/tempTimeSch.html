@@ -1,0 +1,118 @@
+<div ba-panel ba-panel-title="临时方案设置" ba-panel-class="with-scroll" cg-busy="[vm.loadPromise, vm.deletePromise]">
+    <div>
+        <div class="add-row-editable-table">
+            <form class="form-inline" ng-submit="vm.search()">
+                
+                <input type="id" class="form-control" id="id" placeholder="搜索" ng-model="vm.search.id">
+                <div class="input-group" style="width: 200px; padding-top: 15px;">
+                    <input type="text" class="form-control" id="startDate1" name="startDate1" uib-datepicker-popup="yyyy-MM-dd" ng-model="vm.startDate1"
+                        is-open="vm.temp.startDate1" maxlength=10 close-text="关闭" current-text="今天" clear-text="清除" alt-input-formats="altInputFormats"
+                        show-button-bar="true">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.temp.startDate1 = true;"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+                <div class="input-group" style="width: 200px; padding-top: 15px;">
+                    <input type="text" class="form-control" id="startDate2" name="startDate2" uib-datepicker-popup="yyyy-MM-dd" ng-model="vm.startDate2"
+                        is-open="vm.temp.startDate2" maxlength=10 close-text="关闭" current-text="今天" clear-text="清除" alt-input-formats="altInputFormats"
+                        show-button-bar="true">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.temp.startDate2 = true;"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+                <button ng-disabled="vm.butReadonly" type="submit" class="btn btn-default">搜索</button>
+
+                <button class="btn btn-primary pull-right" ng-click="vm.add()">添加</button>
+                <button ng-disabled="!vm.butReadonly" class="btn btn-primary pull-right" ng-click="vm.tempTimeConfigurations()">设置</button>
+            </form>
+        </div>
+
+        <div class="horizontal-scroll">
+            <div ba-panel ba-panel-class="with-scroll horizontal-tabs tabs-panel medium-panel">
+                <uib-tabset active="vm.tabActive">
+                    <uib-tab heading="Main" select="vm.one()">
+
+                        <table class="table" st-table="vm.items" st-pipe="vm.load" ng-if="!vm.hideTable">
+                            <thead>
+                                <tr>
+                                    <th>方案编号</th>
+                                    <th>开始日期</th>
+                                    <th>结束日期</th>
+                                    <th>下达时间</th>
+                                    <th>返回结果</th>
+                                    <th>备注</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="r in vm.items " ng-class="{'black-muted-bg': vm.showbgcolour === r}" ng-click="vm.selectDetail(r)">
+                                    <td>{{r.id}}</td>
+                                    <td>{{r.startDate | date: 'yyyy-MM-dd'}}</td>
+                                    <td>{{r.endDate | date: 'yyyy-MM-dd'}}</td>
+                                    <td>{{r.makeTime | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                                    <td>{{r.resultDisplay}}</td>
+                                    <td>{{r.remark}}</td>
+                                    <td>
+                                        <button class="btn btn-primary editable-table-button btn-xs" ng-click="vm.edit(r, $event)">编辑</button>
+                                        <button class="btn btn-danger editable-table-button btn-xs" ng-click="vm.remove(r, $event)">删除</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td class="text-center" colspan="4">
+                                        <div st-pagination="" st-items-by-page="10" st-displayed-pages="5"></div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+
+                    </uib-tab>
+                    <uib-tab heading="Detail" disable="true">
+                        <table class="table" st-table="vm.tempDatailItems" >
+                            <thead>
+                                <tr>
+                                    <th>方案编号</th>
+                                    <th>组</th>
+                                    <th>开始时间</th>
+                                    <th>是否启用</th>
+                                    <th>亮度</th>
+                                    <th>下达时间</th>
+                                    <th>返回结果</th>
+                                    <th>备注</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="r in vm.tempDatailItems ">
+                                    <td>{{r.tempTimeSchMainId}}</td>
+                                    <td>{{r.group.groupName}}</td>
+                                    <td>{{r.startTime | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                                    <td>{{r.isUseDisplay}}</td>
+                                    <td>{{r.light}}</td>
+                                    <td>{{r.makeTime | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                                    <td>{{r.resultDisplay}}</td>
+                                    <td>{{r.remark}}</td>
+                                    <td>
+                                        <button class="btn btn-primary editable-table-button btn-xs" ng-click="vm.editDetail(r)">编辑</button>
+                                        <button class="btn btn-danger editable-table-button btn-xs" sweetalert sweet-options='vm.sweetOptions' sweet-on-confirm="vm.removeDetail(r)">删除</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td class="text-center" colspan="4">
+                                        <div st-pagination="" st-items-by-page="10" st-displayed-pages="5"></div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </uib-tab>
+
+                </uib-tabset>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<div ba-panel ba-panel-title="查询当前灯状态" ba-panel-class="with-scroll" cg-busy="[vm.loadPromise, vm.deletePromise]">
+
+    <div>
+        <div class="add-row-editable-table">
+            <form class="form-inline" ng-submit="vm.select()">
+                <input type="number" min=0 class="form-control" id="controlNo" placeholder="控制器编号" ng-model="vm.search.controlNo">
+                <input type="number"  min=0 class="form-control" id="lightNo" placeholder="灯线编号" ng-model="vm.search.lightNo">
+                <input type="number"  min=0 class="form-control" id="lightSonNo" placeholder="灯子编号" ng-model="vm.search.lightSonNo">
+                <button type="submit" class="btn btn-default">查询</button>
+            </form>
+        </div>
+
+        <div class="horizontal-scroll">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th >控制器</th>
+                        <th >灯线</th>
+                        <th >灯子编号</th>
+                        <th>描述</th>
+                        <th>地址</th>
+                        <th>状态</th>
+                        <th>亮度</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="r in vm.lights ">
+                        <td>{{r.controlNo}}</td>
+                        <td>{{r.lightNo}}</td>
+                        <td>{{r.no}}</td>
+                        <td>{{r.describe}}</td>
+                        <td>{{r.address}}</td>
+                        <td>{{r.lightState}}</td>
+                        <td>{{r.lightPower}}</td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+</div>

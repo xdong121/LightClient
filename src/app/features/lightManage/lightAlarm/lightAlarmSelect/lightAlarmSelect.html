@@ -1,0 +1,40 @@
+<div ba-panel ba-panel-title="灯报警信息" ba-panel-class="with-scroll" cg-busy="[vm.loadPromise, vm.deletePromise]">
+
+    <div class="add-row-editable-table">
+        <select class="form-control" style="display: inline-block; width: 150px;" ng-selected="vm.selectChecked()" ng-model="vm.isRepair" ng-options="v as k for (k, v) in vm.enums.lightAlarmIsRepair">
+
+        </select>
+        <button class="btn btn-primary" ng-click="vm.runStart()">定时开始</button>
+        <button class="btn btn-primary" ng-click="vm.runStop()">定时结束</button>
+    </div>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>控制器编号</th>
+                <th>灯线编号</th>
+                <th>灯子编号</th>
+                <th>状态</th>
+                <th>灯描述</th>
+                <th>灯地址</th>
+                <th>是否修复</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="r in vm.items | orderBy: 'order'">
+                <td>{{r.controlNo}}</td>
+                <td>{{r.lightNo}}</td>
+                <td>{{r.lightSonNo}}</td>
+                <td>{{r.stateDisplay}}</td>
+                <td>{{r.lightSon.describe}}</td>
+                <td>{{r.lightSon.address}}</td>
+                <td>{{r.isRepairDisplay}}</td>
+                <td>
+                    <button class="btn btn-primary editable-table-button btn-xs" ng-click="vm.byUpdate(r)">更新</button>
+                    <button ng-disabled="vm.isRepair" class="btn btn-primary editable-table-button btn-xs" ng-click="vm.edit(r)">修复</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

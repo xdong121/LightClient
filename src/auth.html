@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Legacy Platform</title>
+
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900&subset=latin,greek,greek-ext,vietnamese,cyrillic-ext,latin-ext,cyrillic'
+    rel='stylesheet' type='text/css'>
+
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon-96x96.png">
+
+  <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
+  <!-- bower:css -->
+  <!-- run `gulp inject` to automatically populate bower styles dependencies -->
+  <!-- endbower -->
+  <!-- endbuild -->
+
+  <!-- build:css({.tmp/serve,src}) styles/auth.css -->
+  <!-- inject:css -->
+  <!-- css files will be automatically insert here -->
+  <!-- endinject -->
+  <!-- endbuild -->
+</head>
+
+<body>
+  <main class="auth-main">
+    <div class="auth-block">
+      <h1>Sign in to Legacy Platform</h1>
+      <a href="reg.html" class="auth-link">New to Legacy Platform? Sign up!</a>
+
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label for="userName" class="col-sm-2 control-label">用户名</label>
+
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="userName" placeholder="用户名">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password" class="col-sm-2 control-label">密 码</label>
+
+          <div class="col-sm-10">
+            <input type="password" class="form-control" id="password" placeholder="密码">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="button" id="signInButton" class="btn btn-default btn-auth" onclick="signIn()">登 录</button>
+            <a href class="forgot-pass">Forgot password?</a>
+          </div>
+        </div>
+      </form>
+
+      <div class="auth-sep"><span><span>or Sign in with one click</span></span>
+      </div>
+
+      <div class="al-share-auth">
+        <ul class="al-share clearfix">
+          <li><i class="socicon socicon-facebook" title="Share on Facebook"></i></li>
+          <li><i class="socicon socicon-twitter" title="Share on Twitter"></i></li>
+          <li><i class="socicon socicon-google" title="Share on Google Plus"></i></li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <script type="text/javascript">
+    function getUrlParameter(sParam) {
+      var sPageUrl = decodeURIComponent(window.location.search.substring(1)),
+        sUrlVariables = sPageUrl.split('&'),
+        sParameterName,
+        i;
+
+      for (i = 0; i < sUrlVariables.length; i++) {
+        sParameterName = sUrlVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+          return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+      }
+    };
+    var profileKey = getUrlParameter("profileKey");
+    var button = document.getElementById('signInButton');
+
+    function signIn() {
+      var userName = document.getElementById("userName").value;
+      var password = document.getElementById("password").value;
+      button.disabled = true;
+
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function (res) {
+        if (this.readyState == 4) {
+          if (this.status == 200) {
+            window.localStorage.setItem(profileKey, this.response);
+            window.location.href = "/";
+          } else {
+            console.error(this);
+            button.disabled = undefined;
+            alert("登录失败, 用户名或者密码错误");
+          }
+        }
+      };
+      xhttp.open("POST", "/Token", true);
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhttp.send("grant_type=password&userName=" + userName + "&password=" + password);
+
+    }
+  </script>
+</body>
+
+</html>

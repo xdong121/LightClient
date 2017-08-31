@@ -1,0 +1,68 @@
+<div class="row" cg-busy="[vm.loadPromise, vm.addPromise, vm.addRootPromise, vm.removePromise]">
+    <div class="col-md-4">
+        <div ba-panel ba-panel-title="组信息" ba-panel-class="xmedium-panel light-text">
+            <div class="horizontal-scroll" >
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="black-muted-bg">
+                            <th>组名</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-class="{'black-muted-bg': !vm.currentGroupLeft}" ng-click="vm.filterByGroup()">
+                            <td>未分组</td>
+                        </tr>
+                        <tr ng-class="{'black-muted-bg': vm.currentGroupLeft === r}" ng-click="vm.filterByGroup(r)" ng-repeat="r in vm.items | orderBy: 'order'" class="no-top-border">
+                            <td>{{r.groupName}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div ba-panel ba-panel-title="灯信息" ba-panel-class="with-scroll light-text">
+            <div class="add-row-editable-table">
+                <button class="btn btn-primary" ng-click="vm.addToGroup(vm.currentGroup)">添加到组</button>
+                <select class="form-control" style="display: inline-block; width: 150px;"
+                title="选择要添加的组" ng-model="vm.currentGroup" ng-options="x as x.groupName for x in vm.items">
+                        <option value="">未分组</option>
+                </select>
+            </div>
+            <table class="table" >
+                <thead>
+                    <tr class="sortable ">
+                        <th class="table-id">
+                            <input type="checkbox" ng-click="vm.toggle()" ng-model="vm.isSelectAll">
+                        </th>
+                        <th >控制器-灯线-灯子编号</th>
+                        <th>描述</th>
+                        <th>地址</th>
+                        <th>经度</th>
+                        <th>纬度</th>
+                        <th>备注</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th><input placeholder="Search First Name" class="input-sm form-control search-input"
+                                ng-model="vm.param" /></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in vm.currentLights | filter: vm.param">
+                        <td class="table-id">
+                            <input type="checkbox" ng-model="item.isSelected">
+                        </td>
+                        <td>{{item.allNo}}</td>
+                        <td>{{item.describe}}</td>
+                        <td>{{item.address}}</td>
+                        <td>{{item.longitude}}</td>
+                        <td>{{item.latitude}}</td>
+                        <td>{{item.reMark}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

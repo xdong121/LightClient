@@ -1,0 +1,140 @@
+<div class="widgets" cg-busy="[vm.loadPromise, vm.submitPromise]">
+
+    <div class="row">
+        <div class="col-md-12" ba-panel ba-panel-title="人员资料" ba-panel-class="with-scroll">
+            <div>
+                <form class="form-horizontal" id="form" name="form" ng-submit="vm.submit()" novalidate>
+                    <div class="form-group" ng-class="{'has-error': form.name.$invalid}">
+                        <label for="name" class="col-sm-2 control-label">姓名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="name" name="name" ng-model="vm.currentItem.name" maxlength="100" ng-required="true">
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': form.no.$invalid}">
+                        <label for="no" class="col-sm-2 control-label">员工编号</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="no" name="no" ng-model="vm.currentItem.no" maxlength="50" ng-required="true">
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': form.employeeStatus.$invalid}">
+                        <label for="employeeStatus" class="col-sm-2 control-label">状态</label>
+                        <div class="col-sm-10">
+                            <select type="text" class="form-control" id="employeeStatus" name="employeeStatus" ng-model="vm.currentItem.employeeStatus" ng-required="true"
+                                ng-options="v as k for (k, v) in vm.enums.employeeStatus">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': form.gender.$invalid}">
+                        <label for="gender" class="col-sm-2 control-label">性别</label>
+                        <div class="col-sm-10">
+                            <select type="text" class="form-control" id="gender" name="gender" ng-model="vm.currentItem.gender" ng-required="true"
+                                ng-options="v as k for (k, v) in vm.enums.gender">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': form.dateOfBirth.$invalid}">
+                        <label for="dateOfBirth" class="col-sm-2 control-label">出生日期</label>
+                        <div class="col-sm-10">
+                            <p class="input-group" style="margin-bottom: 0;">
+                                <input type="text" class="form-control" id="dateOfBirth" name="dateOfBirth" uib-datepicker-popup="yyyy-MM-dd"
+                                    ng-model="vm.currentItem.dateOfBirth" is-open="vm.temp.dateOfBirthOpened" maxlength=10
+                                    close-text="关闭" current-text="今天" clear-text="清除" alt-input-formats="altInputFormats" show-button-bar="true">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="vm.temp.dateOfBirthOpened = true;"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': form.idNumber.$invalid}">
+                        <label for="idNumber" class="col-sm-2 control-label">身份证号</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="idNumber" name="idNumber" ng-model="vm.currentItem.idNumber" maxlength="18" ng-minlength="18">
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': form.phoneNumber.$invalid}">
+                        <label for="phoneNumber" class="col-sm-2 control-label">电话号码</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" ng-model="vm.currentItem.phoneNumber" maxlength="50">
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': form.maritalStatus.$invalid}">
+                        <label for="maritalStatus" class="col-sm-2 control-label">婚姻状况</label>
+                        <div class="col-sm-10">
+                            <select type="text" class="form-control" id="maritalStatus" name="maritalStatus" ng-model="vm.currentItem.maritalStatus" ng-required="true"
+                                ng-options="v as k for (k, v) in vm.enums.maritalStatus">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': form.politicalStatus.$invalid}">
+                        <label for="politicalStatus" class="col-sm-2 control-label">政治面貌</label>
+                        <div class="col-sm-10">
+                            <select type="text" class="form-control" id="politicalStatus" name="politicalStatus" ng-model="vm.currentItem.politicalStatus" ng-required="true"
+                                ng-options="v as k for (k, v) in vm.enums.politicalStatus">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': form.emailAddress.$invalid}">
+                        <label for="emailAddress" class="col-sm-2 control-label">电子邮件</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="emailAddress" name="emailAddress" ng-model="vm.currentItem.emailAddress" maxlength="50">
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': form.employeeNature.$invalid}">
+                        <label for="employeeNature" class="col-sm-2 control-label">人员性质</label>
+                        <div class="col-sm-10">
+                            <select type="text" class="form-control" id="employeeNature" name="employeeNature" ng-model="vm.currentItem.employeeNature" ng-required="true"
+                                ng-options="v as k for (k, v) in vm.enums.employeeNature">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': form.educationalBackground.$invalid}">
+                        <label for="educationalBackground" class="col-sm-2 control-label">学历性质</label>
+                        <div class="col-sm-10">
+                            <select type="text" class="form-control" id="educationalBackground" name="educationalBackground" ng-model="vm.currentItem.educationalBackground" ng-required="true"
+                                ng-options="v as k for (k, v) in vm.enums.educationalBackground">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': form.educationNature.$invalid}">
+                        <label for="educationNature" class="col-sm-2 control-label">学历性质</label>
+                        <div class="col-sm-10">
+                            <select type="text" class="form-control" id="educationNature" name="educationNature" ng-model="vm.currentItem.educationNature" ng-required="true"
+                                ng-options="v as k for (k, v) in vm.enums.educationNature">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': form.educationDegree.$invalid}">
+                        <label for="educationDegree" class="col-sm-2 control-label">学位</label>
+                        <div class="col-sm-10">
+                            <select type="text" class="form-control" id="educationDegree" name="educationDegree" ng-model="vm.currentItem.educationDegree" ng-required="true"
+                                ng-options="v as k for (k, v) in vm.enums.educationDegree">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': form.jobPostId.$invalid}">
+                        <label for="jobPostId" class="col-sm-2 control-label">岗位</label>
+                        <div class="col-sm-10">
+                            <select type="text" class="form-control" id="jobPostId" name="jobPostId" ng-model="vm.currentItem.jobPostId"
+                                ng-options="v.id as v.name for v in vm.posts">
+                                <option value="">---- 请选择岗位 ----</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': form.remark.$invalid}">
+                        <label for="remark" class="col-sm-2 control-label">备注</label>
+                        <div class="col-sm-10">
+                            <textarea type="text" class="form-control" id="remark" name="remark" rows="3" ng-model="vm.currentItem.remark" maxlength="4000">
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-warning" ng-disabled="form.$invalid">保存</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>

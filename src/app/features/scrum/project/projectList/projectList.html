@@ -1,0 +1,37 @@
+<div ba-panel ba-panel-title="近期项目" ba-panel-class="with-scroll light-text">  
+    <div style="overflow-x: auto;">                
+        <table  id="table1" class="table table-hover"  st-table="vm.items1">
+            <tbody>
+                <tr ng-repeat="item in vm.items1 | orderBy: '-updateTime' | limitTo : 3" class="no-top-border">
+                    <td><i class="ion-help-buoy"></i></td>
+                    <td><a class="table-link" ui-sref="scrum.projectList">{{item.name}}</a></td>
+                    <td><a class="table-link" ui-sref="scrum.projectList">仪表板</a></td>
+                    <td><a class="table-link" ui-sref="scrum.projectList">工作</a></td>
+                    <td><button class="btn btn-danger editable-table-button btn-xs" sweetalert sweet-options='vm.deleteSweetOptions' sweet-on-confirm="vm.remove(item)">删除</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div> 
+<div ba-panel ba-panel-title="所有项目" ba-panel-class="with-scroll light-text">     
+    <div style="overflow-x: auto;">               
+        <table  id="table2" class="table table-hover"  st-table="vm.items" st-pipe="vm.load">
+            <tbody>
+                <tr ng-repeat="item in vm.items" class="no-top-border">
+                    <td><i class="ion-help-buoy"></i></td>
+                    <td><a class="table-link" ui-sref="scrum.projectList">{{item.name}}</a></td>
+                    <td><a class="table-link" ui-sref="scrum.projectList">仪表板</a></td>
+                    <td><a class="table-link" ui-sref="scrum.projectList">工作</a></td>
+                    <td><button class="btn btn-danger editable-table-button btn-xs" sweetalert sweet-options='vm.deleteSweetOptions' sweet-on-confirm="vm.remove(item)">删除</button></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td class="text-center" colspan="5">
+                        <div st-pagination="" st-items-by-page="5" st-displayed-pages="5"></div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+@import "common.scss";
+
+// for modal form label
+$label-color: #7d7d7d;
+.modal-body .control-label {
+    color: $label-color !important;
+    font-weight: 400;
+}
+
+$error-color: #a94442;
+.modal .modal-dialog .has-error .form-control {
+    border: 1px solid $error-color;
+}
+
+.modal .modal-dialog .modal-body .has-error p .help-block,
+.modal .modal-dialog .modal-body .has-error div .help-block,
+.modal .modal-dialog .modal-body .has-error span .help-block {
+    color: $error-color;
+}
+
+// for angular prompt
+.modal-dialog .modal-footer button.btn.btn-default {
+    color: #333;
+    background-color: #ffffff;
+    border-color: #ccc;
+}
+
+.modal-dialog .modal-footer button.btn.btn-primary {
+    background-color: #209e91;
+    border-color: #209e91;
+}
+
+.modal-dialog .modal-footer button.btn.btn-default.btn-primary {
+    color: white;
+}
+
+//for table
+table.no-wrap, tr.no-wrap, th.no-wrap, td.no-wrap {
+    white-space: nowrap !important;
+}
+
+a.table-link {
+    color: #ffffff;
+    font-weight: bold;
+}
+a.table-link:hover {
+    color: #e85656;
+}
